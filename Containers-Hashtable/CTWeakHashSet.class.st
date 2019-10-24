@@ -1,17 +1,24 @@
 Class {
-	#name : #WeakKeyHashTable,
-	#superclass : #HashTable,
+	#name : #CTWeakHashSet,
+	#superclass : #CTHashSet,
 	#category : #'Containers-Hashtable'
 }
 
-{ #category : #adding }
-WeakKeyHashTable >> at: aKey put: aValue [
-	aKey ifNil: [self error: 'WeakKeyHashTables cannot meaningfully contain nil as an element'].
-	^super at: aKey put: aValue
+{ #category : #enumerating }
+CTWeakHashSet >> do: aBlock [
+	self table withIndexDo: [ :each :index |
+		| current |
+		self fixAt: index.
+		current := each.
+		[ current notNil ]
+			whileTrue: [
+				current key ifNotNil: [ :key |
+					aBlock value: key ].
+				current := current next ] ]
 ]
 
 { #category : #private }
-WeakKeyHashTable >> fixAt: anInteger [
+CTWeakHashSet >> fixAt: anInteger [
 	"remove all items at an index in the table who's key is garbage collected"
 	| item lastItem |
 	item := self table at: anInteger.
@@ -37,12 +44,12 @@ WeakKeyHashTable >> fixAt: anInteger [
 ]
 
 { #category : #private }
-WeakKeyHashTable >> itemClass [
-	^WeakKeyTableItem
+CTWeakHashSet >> itemClass [
+	^CTWeakKeyTableItem
 ]
 
 { #category : #private }
-WeakKeyHashTable >> itemFor: aKey atIndex: anInteger [
+CTWeakHashSet >> itemFor: aKey atIndex: anInteger [
 	| item |
 	
 	self fixAt: anInteger.
@@ -54,15 +61,4 @@ WeakKeyHashTable >> itemFor: aKey atIndex: anInteger [
 				ifTrue: [ ^item ].
 			item := item next ].
 	^nil
-]
-
-{ #category : #enumerating }
-WeakKeyHashTable >> keysAndValuesDo: aBlock [
-	self table withIndexDo: [ :each :index |
-		| current |
-		self fixAt: index.
-		current := each.
-		[ current notNil ] whileTrue:  [
-			aBlock value: current key value: current value.
-			current := current next ] ]
 ]

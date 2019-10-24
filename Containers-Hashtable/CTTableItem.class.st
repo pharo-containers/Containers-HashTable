@@ -1,5 +1,5 @@
 Class {
-	#name : #TableItem,
+	#name : #CTTableItem,
 	#superclass : #Object,
 	#instVars : [
 		'key',
@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : #'instance creation' }
-TableItem class >> key: aKey value: aValue [
+CTTableItem class >> key: aKey value: aValue [
 	^self new
 		key: aKey;
 		value: aValue;
@@ -19,7 +19,7 @@ TableItem class >> key: aKey value: aValue [
 ]
 
 { #category : #'instance creation' }
-TableItem class >> key: aKey value: aValue next: anItem [
+CTTableItem class >> key: aKey value: aValue next: anItem [
 	^self new
 		key: aKey;
 		value: aValue;
@@ -28,44 +28,44 @@ TableItem class >> key: aKey value: aValue next: anItem [
 ]
 
 { #category : #accessing }
-TableItem >> key [
+CTTableItem >> key [
 	^key
 ]
 
 { #category : #accessing }
-TableItem >> key: anObject [
+CTTableItem >> key: anObject [
 	key := anObject
 ]
 
 { #category : #accessing }
-TableItem >> keyHash [
+CTTableItem >> keyHash [
 	^keyHash
 ]
 
 { #category : #accessing }
-TableItem >> keyHash: anIngeter [ 
+CTTableItem >> keyHash: anIngeter [ 
 	keyHash := anIngeter
 ]
 
 { #category : #accessing }
-TableItem >> next [
+CTTableItem >> next [
 	^next
 ]
 
 { #category : #accessing }
-TableItem >> next: anObject [
+CTTableItem >> next: anObject [
 	next := anObject
 ]
 
 { #category : #copying }
-TableItem >> postCopy [
+CTTableItem >> postCopy [
 	super postCopy.
 	next isNil ifFalse: [
 		next := next copy ]
 ]
 
 { #category : #printing }
-TableItem >> printOn: aStream [
+CTTableItem >> printOn: aStream [
 	super printOn: aStream.
 	aStream
 		nextPutAll: ' key: ';
@@ -75,7 +75,7 @@ TableItem >> printOn: aStream [
 ]
 
 { #category : #public }
-TableItem >> setAsNil [
+CTTableItem >> setAsNil [
 	self next: nil.
 	self key: nil.
 	self keyHash: nil.
@@ -83,11 +83,11 @@ TableItem >> setAsNil [
 ]
 
 { #category : #accessing }
-TableItem >> value [
+CTTableItem >> value [
 	^value
 ]
 
 { #category : #accessing }
-TableItem >> value: anObject [
+CTTableItem >> value: anObject [
 	value := anObject
 ]

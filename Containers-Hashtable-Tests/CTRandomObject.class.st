@@ -1,5 +1,5 @@
 Class {
-	#name : #RandomObject,
+	#name : #CTRandomObject,
 	#superclass : #Object,
 	#instVars : [
 		'hash'
@@ -8,12 +8,12 @@ Class {
 }
 
 { #category : #comparing }
-RandomObject >> hash [
+CTRandomObject >> hash [
 	^hash
 ]
 
 { #category : #'initialize-release' }
-RandomObject >> initialize [
+CTRandomObject >> initialize [
 	super initialize.
 	hash := SmallInteger maxVal atRandom
 ]

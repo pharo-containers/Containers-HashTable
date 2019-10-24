@@ -1,17 +1,17 @@
 Class {
-	#name : #WeakHashSetTest,
-	#superclass : #HashSetTest,
+	#name : #CTWeakHashSetTest,
+	#superclass : #CTHashSetTest,
 	#category : #'Containers-Hashtable-Tests-SUnit'
 }
 
 { #category : #running }
-WeakHashSetTest >> setUp [
+CTWeakHashSetTest >> setUp [
 	super setUp.
-	set := WeakHashSet new
+	set := CTWeakHashSet new
 ]
 
 { #category : #testing }
-WeakHashSetTest >> testWeakInstance [
+CTWeakHashSetTest >> testWeakInstance [
 	| createBlock string |
 	createBlock := [(String new: 3)
 		at: 1 put: $n;

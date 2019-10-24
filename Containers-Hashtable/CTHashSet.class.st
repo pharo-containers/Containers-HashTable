@@ -1,13 +1,13 @@
 Class {
-	#name : #HashSet,
-	#superclass : #HashTable,
+	#name : #CTHashSet,
+	#superclass : #CTHashTable,
 	#category : #'Containers-Hashtable'
 }
 
 { #category : #comparing }
-HashSet >> = aSet [
+CTHashSet >> = aSet [
 	self == aSet ifTrue: [^ true].	"stop recursion"
-	((aSet isKindOf: Set) or: [ aSet isKindOf: HashSet ])
+	((aSet isKindOf: Set) or: [ aSet isKindOf: CTHashSet ])
 		ifFalse: [^ false].
 	self size = aSet size ifFalse: [^ false].
 	self do: [:each | (aSet includes: each) ifFalse: [^ false]].
@@ -15,13 +15,13 @@ HashSet >> = aSet [
 ]
 
 { #category : #adding }
-HashSet >> add: newObject [
+CTHashSet >> add: newObject [
 	newObject ifNil: [self error: 'Sets cannot meaningfully contain nil as an element'].
 	^self at: newObject put: true
 ]
 
 { #category : #adding }
-HashSet >> addAll: aCollection [ 
+CTHashSet >> addAll: aCollection [ 
 	"Include all the elements of aCollection as the receiver's elements. Answer 
 	aCollection. Actually, any object responding to #do: can be used as argument."
 
@@ -30,12 +30,12 @@ HashSet >> addAll: aCollection [
 ]
 
 { #category : #converting }
-HashSet >> asSet [
+CTHashSet >> asSet [
 	^self
 ]
 
 { #category : #enumerating }
-HashSet >> collect: aBlock [ 
+CTHashSet >> collect: aBlock [ 
 	"Evaluate aBlock with each of the receiver's elements as the argument.  
 	Collect the resulting values into a collection like the receiver. Answer  
 	the new collection."
@@ -47,24 +47,24 @@ HashSet >> collect: aBlock [
 ]
 
 { #category : #enumerating }
-HashSet >> do: aBlock [
+CTHashSet >> do: aBlock [
 	"self keysDo: aBlock"
 	self keysAndValuesDo: [ :key :value |
 		aBlock value: key ]
 ]
 
 { #category : #testing }
-HashSet >> includes: anObject [
+CTHashSet >> includes: anObject [
 	^self at: anObject ifAbsent: [ false ]
 ]
 
 { #category : #testing }
-HashSet >> occurrencesOf: anObject [ 
+CTHashSet >> occurrencesOf: anObject [ 
 	^ (self includes: anObject) ifTrue: [1] ifFalse: [0]
 ]
 
 { #category : #printing }
-HashSet >> printOn: aStream [ 
+CTHashSet >> printOn: aStream [ 
 	"printNameOn:"
 	| title |
 	title := self class name.
@@ -80,12 +80,12 @@ HashSet >> printOn: aStream [
 ]
 
 { #category : #removing }
-HashSet >> remove: oldObject ifAbsent: anExceptionBlock [
+CTHashSet >> remove: oldObject ifAbsent: anExceptionBlock [
 	^self removeKey: oldObject ifAbsent: anExceptionBlock.
 ]
 
 { #category : #enumerating }
-HashSet >> select: aBlock [ 
+CTHashSet >> select: aBlock [ 
 	"Evaluate aBlock with each of the receiver's elements as the argument. 
 	Collect into a new collection like the receiver, only those elements for 
 	which aBlock evaluates to true. Answer the new collection."

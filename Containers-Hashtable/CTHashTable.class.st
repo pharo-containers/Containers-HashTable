@@ -1,5 +1,5 @@
 Class {
-	#name : #HashTable,
+	#name : #CTHashTable,
 	#superclass : #Collection,
 	#instVars : [
 		'table',
@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-HashTable class >> asFileSizeString: bytes [
+CTHashTable class >> asFileSizeString: bytes [
     | units exp |
     units := #(' B'  ' KB' ' MB' ' GB' ' TB' ' PB').
     exp := bytes floorLog: 1024.
@@ -20,12 +20,12 @@ HashTable class >> asFileSizeString: bytes [
 ]
 
 { #category : #'instance creation' }
-HashTable class >> capacity: aCapacity [
+CTHashTable class >> capacity: aCapacity [
 	^self capacity: aCapacity loadfactor: 0.6
 ]
 
 { #category : #'instance creation' }
-HashTable class >> capacity: anInteger loadfactor: aFloat [
+CTHashTable class >> capacity: anInteger loadfactor: aFloat [
 	| size table |
 	size := (anInteger / aFloat) asInteger.
 	table := Array new: size.
@@ -37,23 +37,23 @@ HashTable class >> capacity: anInteger loadfactor: aFloat [
 ]
 
 { #category : #'instance creation' }
-HashTable class >> new [
+CTHashTable class >> new [
 	^self capacity: 10
 ]
 
 { #category : #'instance creation' }
-HashTable class >> new: anInteger [
+CTHashTable class >> new: anInteger [
 	^self capacity: anInteger
 ]
 
 { #category : #comparing }
-HashTable >> = aDictionary [
+CTHashTable >> = aDictionary [
 	"Two dictionaries are equal if
 	 (a) they are the same 'kind' of thing.
 	 (b) they have the same set of keys.
 	 (c) for each (common) key, they have the same value"
 
-	((aDictionary isKindOf: Dictionary) or: [aDictionary isKindOf: HashTable])
+	((aDictionary isKindOf: Dictionary) or: [aDictionary isKindOf: CTHashTable])
 		ifFalse: [^false].
 	self size = aDictionary size ifFalse: [^false].
 	self keysAndValuesDo: [ :key :value |
@@ -63,17 +63,17 @@ HashTable >> = aDictionary [
 ]
 
 { #category : #adding }
-HashTable >> add: anAssociation [
+CTHashTable >> add: anAssociation [
 	^self at: anAssociation key put: anAssociation value
 ]
 
 { #category : #adding }
-HashTable >> add: newObject withOccurrences: anInteger [
+CTHashTable >> add: newObject withOccurrences: anInteger [
 	^ self add: newObject
 ]
 
 { #category : #adding }
-HashTable >> addAll: aKeyedCollection [
+CTHashTable >> addAll: aKeyedCollection [
 	aKeyedCollection == self ifFalse: [
 		aKeyedCollection keysAndValuesDo: [ :key :value |
 			self at: key put: value ] ].
@@ -81,7 +81,7 @@ HashTable >> addAll: aKeyedCollection [
 ]
 
 { #category : #private }
-HashTable >> addAllOf: anItem to: aTable [
+CTHashTable >> addAllOf: anItem to: aTable [
 	| item oldNext |
 	item := anItem.
 	[ item notNil ]
@@ -92,7 +92,7 @@ HashTable >> addAllOf: anItem to: aTable [
 ]
 
 { #category : #private }
-HashTable >> addItem: anItem to: aTable [
+CTHashTable >> addItem: anItem to: aTable [
 	| index |
 	index := self computeIndexFromHash: anItem keyHash forTable: aTable.
 	anItem next: (aTable at: index).
@@ -100,7 +100,7 @@ HashTable >> addItem: anItem to: aTable [
 ]
 
 { #category : #private }
-HashTable >> addKey: aKey value: aValue [
+CTHashTable >> addKey: aKey value: aValue [
 	| item newSize index |
 	newSize := self size + 1.
 	self ensureCapacity: newSize.
@@ -112,30 +112,30 @@ HashTable >> addKey: aKey value: aValue [
 ]
 
 { #category : #accessing }
-HashTable >> associationAt: key [
+CTHashTable >> associationAt: key [
 	^ self
 		associationAt: key
 		ifAbsent: [ self errorKeyNotFound ]
 ]
 
 { #category : #accessing }
-HashTable >> associationAt: key ifAbsent: aBlock [ 
+CTHashTable >> associationAt: key ifAbsent: aBlock [ 
 	^ key -> (self at: key ifAbsent: [ ^aBlock value ])
 ]
 
 { #category : #enumerating }
-HashTable >> associationsDo: aBlock [
+CTHashTable >> associationsDo: aBlock [
 	self keysAndValuesDo: [ :key :value |
 		aBlock value: key -> value ]
 ]
 
 { #category : #accessing }
-HashTable >> at: aKey [
+CTHashTable >> at: aKey [
 	^self at: aKey ifAbsent: [ self errorKeyNotFound ]
 ]
 
 { #category : #accessing }
-HashTable >> at: aKey ifAbsent: aBlock [
+CTHashTable >> at: aKey ifAbsent: aBlock [
 	| index item |
 	index := self computeIndex: aKey.
 	item := self itemFor: aKey atIndex: index.
@@ -145,7 +145,7 @@ HashTable >> at: aKey ifAbsent: aBlock [
 ]
 
 { #category : #accessing }
-HashTable >> at: key ifAbsentPut: aBlock [ 
+CTHashTable >> at: key ifAbsentPut: aBlock [ 
 	"Return the value at the given key. 
 	If key is not included in the receiver store the result 
 	of evaluating aBlock as new value."
@@ -159,7 +159,7 @@ HashTable >> at: key ifAbsentPut: aBlock [
 ]
 
 { #category : #accessing }
-HashTable >> at: key ifPresent: aBlock [
+CTHashTable >> at: key ifPresent: aBlock [
 	"Lookup the given key in the receiver. If it is present, answer the value of evaluating the given block with the value associated with the key. Otherwise, answer nil."
 
 	| v |
@@ -168,7 +168,7 @@ HashTable >> at: key ifPresent: aBlock [
 ]
 
 { #category : #adding }
-HashTable >> at: aKey put: aValue [	
+CTHashTable >> at: aKey put: aValue [	
 	| index item |
 	index := self computeIndex: aKey.
 	item := self itemFor: aKey atIndex: index.
@@ -179,17 +179,17 @@ HashTable >> at: aKey put: aValue [
 ]
 
 { #category : #accessing }
-HashTable >> capacity [
+CTHashTable >> capacity [
 	^capacity
 ]
 
 { #category : #private }
-HashTable >> capacity: anObject [
+CTHashTable >> capacity: anObject [
 	capacity := anObject
 ]
 
 { #category : #enumerating }
-HashTable >> collect: aBlock [ 
+CTHashTable >> collect: aBlock [ 
 	"Evaluate aBlock with each of my values as the argument.  Collect the
 	resulting values into a collection that is like me. Answer with the new
 	collection."
@@ -200,33 +200,33 @@ HashTable >> collect: aBlock [
 ]
 
 { #category : #private }
-HashTable >> computeIndex: anObject [
+CTHashTable >> computeIndex: anObject [
 	^ self computeIndexFromHash: (self hashFor: anObject) forTable: self table.
 ]
 
 { #category : #private }
-HashTable >> computeIndexFromHash: aHash forTable: aTable [
+CTHashTable >> computeIndexFromHash: aHash forTable: aTable [
 	^ (aHash \\ aTable size) + 1.
 ]
 
 { #category : #private }
-HashTable >> computeNewSize: minimum [
+CTHashTable >> computeNewSize: minimum [
 	^minimum max: (self table size * 2) + 1.
 	
 ]
 
 { #category : #private }
-HashTable >> decrementSize [
+CTHashTable >> decrementSize [
 	self size: self size - 1
 ]
 
 { #category : #enumerating }
-HashTable >> do: aBlock [
+CTHashTable >> do: aBlock [
 	self valuesDo: aBlock
 ]
 
 { #category : #public }
-HashTable >> ensureCapacity: anInteger [
+CTHashTable >> ensureCapacity: anInteger [
 	"returns if the table had to grow"
 	self capacity < anInteger
 		ifTrue: [
@@ -236,12 +236,12 @@ HashTable >> ensureCapacity: anInteger [
 ]
 
 { #category : #private }
-HashTable >> errorKeyNotFound [
+CTHashTable >> errorKeyNotFound [
 	self error: 'key not found'
 ]
 
 { #category : #private }
-HashTable >> growTo: anInteger [	
+CTHashTable >> growTo: anInteger [	
 	| array |
 	anInteger <= self table size ifTrue: [ self error: 'oops' ].
 	array := Array new: anInteger.
@@ -252,41 +252,41 @@ HashTable >> growTo: anInteger [
 ]
 
 { #category : #private }
-HashTable >> hashFor: anObject [
+CTHashTable >> hashFor: anObject [
 	^ anObject hash
 ]
 
 { #category : #testing }
-HashTable >> includesKey: aKey [
+CTHashTable >> includesKey: aKey [
 	self at: aKey ifAbsent: [ ^false ].
 	^true.
 ]
 
 { #category : #'initialize-release' }
-HashTable >> initialize [
+CTHashTable >> initialize [
 	super initialize.
 	self size: 0.
 ]
 
 { #category : #'user interface' }
-HashTable >> inspectWithLabel: aLabel [
+CTHashTable >> inspectWithLabel: aLabel [
 	"Open a HashTableInspector on the receiver. Use basicInspect to get a normal (less useful) type of inspector."
 
 	self inspectorClass openOn: self withEvalPane: true withLabel: aLabel
 ]
 
 { #category : #private }
-HashTable >> is: anObject sameAs: anotherObject [
+CTHashTable >> is: anObject sameAs: anotherObject [
 	^ anObject = anotherObject
 ]
 
 { #category : #private }
-HashTable >> itemClass [
-	^TableItem
+CTHashTable >> itemClass [
+	^CTTableItem
 ]
 
 { #category : #private }
-HashTable >> itemFor: aKey atIndex: anInteger [
+CTHashTable >> itemFor: aKey atIndex: anInteger [
 	| item |
 	item := self table at: anInteger.
 	[ (item isNil or: [ self is: item key sameAs: aKey ]) not ]
@@ -295,7 +295,7 @@ HashTable >> itemFor: aKey atIndex: anInteger [
 ]
 
 { #category : #accessing }
-HashTable >> keys [
+CTHashTable >> keys [
 	"Answer a Collection containing the receiver's values."
 	| out |
 	out := WriteStream on: (Array new: self size).
@@ -304,7 +304,7 @@ HashTable >> keys [
 ]
 
 { #category : #enumerating }
-HashTable >> keysAndValuesDo: aBlock [
+CTHashTable >> keysAndValuesDo: aBlock [
 	self table do: [ :each |
 		| current |
 		current := each.
@@ -314,13 +314,13 @@ HashTable >> keysAndValuesDo: aBlock [
 ]
 
 { #category : #enumerating }
-HashTable >> keysDo: aBlock [
+CTHashTable >> keysDo: aBlock [
 	self keysAndValuesDo: [ :key :value |
 		aBlock value: key ]
 ]
 
 { #category : #accessing }
-HashTable >> keysSortedSafely [
+CTHashTable >> keysSortedSafely [
 	"Answer a SortedCollection containing the receiver's keys."
 	| sortedKeys |
 	sortedKeys := SortedCollection new: self size.
@@ -333,25 +333,25 @@ HashTable >> keysSortedSafely [
 ]
 
 { #category : #accessing }
-HashTable >> loadfactor [
+CTHashTable >> loadfactor [
 	^loadfactor
 ]
 
 { #category : #accessing }
-HashTable >> loadfactor: aFloat [ 
+CTHashTable >> loadfactor: aFloat [ 
 	loadfactor := aFloat.
 	self ensureCapacity: (self capacity / self loadfactor) asInteger.
 ]
 
 { #category : #copying }
-HashTable >> postCopy [
+CTHashTable >> postCopy [
 	super postCopy.
 	table := table collect: [ :each |
 		each copy ]
 ]
 
 { #category : #printing }
-HashTable >> printElementsOn: aStream [
+CTHashTable >> printElementsOn: aStream [
 	aStream nextPut: $(.
 	self keysSortedSafely do:
 		[:key | aStream print: key; nextPutAll: '->'; print: (self at: key); space].
@@ -359,7 +359,7 @@ HashTable >> printElementsOn: aStream [
 ]
 
 { #category : #private }
-HashTable >> removeItemWithKey: aKey from: anItem ifAbsent: aBlock [
+CTHashTable >> removeItemWithKey: aKey from: anItem ifAbsent: aBlock [
 	| nextItem value |	
 	nextItem := anItem next.
 	^nextItem isNil
@@ -378,12 +378,12 @@ HashTable >> removeItemWithKey: aKey from: anItem ifAbsent: aBlock [
 ]
 
 { #category : #removing }
-HashTable >> removeKey: aKey [
+CTHashTable >> removeKey: aKey [
 	^self removeKey: aKey ifAbsent: [ self errorKeyNotFound ]
 ]
 
 { #category : #removing }
-HashTable >> removeKey: aKey ifAbsent: aBlock [
+CTHashTable >> removeKey: aKey ifAbsent: aBlock [
 	| index item value |
 	index := self computeIndex: aKey.
 	item := self table at: index.	 
@@ -402,7 +402,7 @@ HashTable >> removeKey: aKey ifAbsent: aBlock [
 ]
 
 { #category : #enumerating }
-HashTable >> select: aBlock [ 
+CTHashTable >> select: aBlock [ 
 	"Evaluate aBlock with each of my values as the argument. Collect into a
 	new dictionary, only those associations for which aBlock evaluates to
 	true."
@@ -416,32 +416,32 @@ HashTable >> select: aBlock [
 ]
 
 { #category : #private }
-HashTable >> setLoadfactor: aFloat [ 
+CTHashTable >> setLoadfactor: aFloat [ 
 	loadfactor := aFloat
 ]
 
 { #category : #accessing }
-HashTable >> size [
+CTHashTable >> size [
 	^size
 ]
 
 { #category : #private }
-HashTable >> size: anInteger [
+CTHashTable >> size: anInteger [
 	size := anInteger
 ]
 
 { #category : #private }
-HashTable >> table [
+CTHashTable >> table [
 	^table
 ]
 
 { #category : #private }
-HashTable >> table: anObject [
+CTHashTable >> table: anObject [
 	table := anObject
 ]
 
 { #category : #accessing }
-HashTable >> values [
+CTHashTable >> values [
 	"Answer a Collection containing the receiver's values."
 	| out |
 	out := WriteStream on: (Array new: self size).
@@ -450,13 +450,13 @@ HashTable >> values [
 ]
 
 { #category : #enumerating }
-HashTable >> valuesDo: aBlock [
+CTHashTable >> valuesDo: aBlock [
 	self keysAndValuesDo: [ :key :value |
 		aBlock value: value ]
 ]
 
 { #category : #private }
-HashTable >> withTable: anArray [
+CTHashTable >> withTable: anArray [
 	"private -- for use only in copy"
 	table := anArray
 ]

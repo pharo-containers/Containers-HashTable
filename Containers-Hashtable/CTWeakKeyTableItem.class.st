@@ -1,16 +1,16 @@
 Class {
-	#name : #WeakKeyTableItem,
-	#superclass : #TableItem,
+	#name : #CTWeakKeyTableItem,
+	#superclass : #CTTableItem,
 	#category : #'Containers-Hashtable'
 }
 
 { #category : #accessing }
-WeakKeyTableItem >> key [
+CTWeakKeyTableItem >> key [
 	^key first
 ]
 
 { #category : #accessing }
-WeakKeyTableItem >> key: anObject [
+CTWeakKeyTableItem >> key: anObject [
 	key := WeakArray with: anObject.
 	keyHash := anObject hash.
 ]

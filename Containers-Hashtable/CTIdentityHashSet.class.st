@@ -5,17 +5,17 @@ copy methods from IdentifyHashTable here
 Yes this is ugly, give me Traits and I will fix it.
 "
 Class {
-	#name : #IdentityHashSet,
-	#superclass : #HashSet,
+	#name : #CTIdentityHashSet,
+	#superclass : #CTHashSet,
 	#category : #'Containers-Hashtable'
 }
 
 { #category : #private }
-IdentityHashSet >> hashFor: anObject [
+CTIdentityHashSet >> hashFor: anObject [
 	^ anObject identityHash
 ]
 
 { #category : #private }
-IdentityHashSet >> is: anObject sameAs: anotherObject [
+CTIdentityHashSet >> is: anObject sameAs: anotherObject [
 	^ anObject == anotherObject
 ]

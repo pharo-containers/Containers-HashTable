@@ -1,5 +1,5 @@
 Class {
-	#name : #DictionarySpeedTest,
+	#name : #CTDictionarySpeedTest,
 	#superclass : #Object,
 	#instVars : [
 		'stepsize',
@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #finding }
-DictionarySpeedTest class >> findBigOnes [
+CTDictionarySpeedTest class >> findBigOnes [
 	"self findBigOnes"
 	^(Set allSubclasses
 		add: Set;
@@ -19,7 +19,7 @@ DictionarySpeedTest class >> findBigOnes [
 ]
 
 { #category : #replacing }
-DictionarySpeedTest class >> replaceBigs: aClass with: anOtherClass [
+CTDictionarySpeedTest class >> replaceBigs: aClass with: anOtherClass [
 	"self replaceBigs: WeakSet with: WeakHashSet"
 	| new |
 	(aClass allInstances select: [ :each | each size > 4000 ]) do: [ :each |
@@ -29,11 +29,11 @@ DictionarySpeedTest class >> replaceBigs: aClass with: anOtherClass [
 ]
 
 { #category : #finding }
-DictionarySpeedTest class >> replaceMCInstances [
+CTDictionarySpeedTest class >> replaceMCInstances [
 	"self replaceMCInstances"
 	| oldSet newSet newSize oldSize |
 	oldSet := MCDefinition classPool at: #Instances.
-	newSet := HashSet new.
+	newSet := CTHashSet new.
 	oldSize := oldSet size.
 	newSize := oldSet inject: 0 into: [ :s :each | s + 1].
 	self inform: ' old size: ' , oldSize asString , ' new size: ' , newSize asString , ' '.
@@ -42,7 +42,7 @@ DictionarySpeedTest class >> replaceMCInstances [
 ]
 
 { #category : #testing }
-DictionarySpeedTest class >> testClass: aClass [
+CTDictionarySpeedTest class >> testClass: aClass [
 	| step test ord |
 	step := 100.
 	test := aClass new.
@@ -61,13 +61,13 @@ DictionarySpeedTest class >> testClass: aClass [
 ]
 
 { #category : #testing }
-DictionarySpeedTest class >> testClasses [
+CTDictionarySpeedTest class >> testClasses [
 	"DictionarySpeedTest testClasses"
 	self new testClasses
 ]
 
 { #category : #testing }
-DictionarySpeedTest class >> testDictonary [
+CTDictionarySpeedTest class >> testDictonary [
 	| step test ord |
 	step := 100.
 	test := Dictionary new.
@@ -86,13 +86,13 @@ DictionarySpeedTest class >> testDictonary [
 ]
 
 { #category : #testing }
-DictionarySpeedTest class >> testObjects [
+CTDictionarySpeedTest class >> testObjects [
 	"DictionarySpeedTest testObjects"
 	self new testObjects
 ]
 
 { #category : #finding }
-DictionarySpeedTest class >> testSizes: oldSet [
+CTDictionarySpeedTest class >> testSizes: oldSet [
 	"self testSizes: (MCDefinition classPool at: #Instances)"
 	"self testSizes: (Symbol classPool at: #SymbolTable)"
 	| newSize oldSize |
@@ -102,29 +102,29 @@ DictionarySpeedTest class >> testSizes: oldSet [
 ]
 
 { #category : #utility }
-DictionarySpeedTest >> asSelector: aClass [
+CTDictionarySpeedTest >> asSelector: aClass [
 	^ ( 'test' , aClass name, '0n:' ) asSymbol
 ]
 
 { #category : #'initialize-release' }
-DictionarySpeedTest >> initialize [
+CTDictionarySpeedTest >> initialize [
 	super initialize.
 	self stepsize: 100.
 	self testsize: 10000.
 ]
 
 { #category : #accessing }
-DictionarySpeedTest >> stepsize [
+CTDictionarySpeedTest >> stepsize [
 	^stepsize
 ]
 
 { #category : #accessing }
-DictionarySpeedTest >> stepsize: anObject [
+CTDictionarySpeedTest >> stepsize: anObject [
 	stepsize := anObject
 ]
 
 { #category : #testing }
-DictionarySpeedTest >> testClasses [
+CTDictionarySpeedTest >> testClasses [
 	| stream |
 	self testDictionaryClasses do: [ :each |
 		Transcript show: 'Testing: ' , each name asString ; cr.
@@ -135,7 +135,7 @@ DictionarySpeedTest >> testClasses [
 ]
 
 { #category : #testing }
-DictionarySpeedTest >> testDictionary: aDictionaryClass of: anObjectClass on: aStream [ 
+CTDictionarySpeedTest >> testDictionary: aDictionaryClass of: anObjectClass on: aStream [ 
 	| test ord |
 	test := aDictionaryClass new.
 	[ test size >= self testsize] whileFalse: [
@@ -154,26 +154,26 @@ DictionarySpeedTest >> testDictionary: aDictionaryClass of: anObjectClass on: aS
 ]
 
 { #category : #accessing }
-DictionarySpeedTest >> testDictionaryClasses [
+CTDictionarySpeedTest >> testDictionaryClasses [
 	^Array
 		with: Dictionary
 		with: IdentityDictionary
-		with: HashTable
-		with: IdentityHashTable
+		with: CTHashTable
+		with: CTIdentityHashTable
 ]
 
 { #category : #accessing }
-DictionarySpeedTest >> testObjectClasses [
+CTDictionarySpeedTest >> testObjectClasses [
 	^Array
 		with: Object
-		with: PrimeObject
+		with: CTPrimeObject
 		"with: CVAutoincrementObject
 		with: CIVAutoincrementObject
 		with: RandomObject"
 ]
 
 { #category : #testing }
-DictionarySpeedTest >> testObjects [
+CTDictionarySpeedTest >> testObjects [
 	| stream |
 	self testObjectClasses do: [ :each |
 		Transcript show: 'Testing: ' , each name asString ; cr.
@@ -184,11 +184,11 @@ DictionarySpeedTest >> testObjects [
 ]
 
 { #category : #accessing }
-DictionarySpeedTest >> testsize [
+CTDictionarySpeedTest >> testsize [
 	^testsize
 ]
 
 { #category : #accessing }
-DictionarySpeedTest >> testsize: anObject [
+CTDictionarySpeedTest >> testsize: anObject [
 	testsize := anObject
 ]

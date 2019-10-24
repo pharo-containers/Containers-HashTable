@@ -1,5 +1,5 @@
 Class {
-	#name : #CIVAutoincrementObject,
+	#name : #CTCIVAutoincrementObject,
 	#superclass : #Object,
 	#instVars : [
 		'hash'
@@ -11,13 +11,13 @@ Class {
 }
 
 { #category : #'class initialization' }
-CIVAutoincrementObject class >> initialize [
+CTCIVAutoincrementObject class >> initialize [
 	"self initialize"
 	nextHash := 0
 ]
 
 { #category : #'instance creation' }
-CIVAutoincrementObject class >> new [
+CTCIVAutoincrementObject class >> new [
 	nextHash = SmallInteger maxVal ifTrue: [
 		nextHash := 0 ].
 	nextHash := nextHash + 1.
@@ -27,11 +27,11 @@ CIVAutoincrementObject class >> new [
 ]
 
 { #category : #comparing }
-CIVAutoincrementObject >> hash [
+CTCIVAutoincrementObject >> hash [
 	^hash
 ]
 
 { #category : #private }
-CIVAutoincrementObject >> hash: anObject [
+CTCIVAutoincrementObject >> hash: anObject [
 	hash := anObject
 ]

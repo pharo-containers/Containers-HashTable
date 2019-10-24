@@ -1,5 +1,5 @@
 Class {
-	#name : #HashSetTest,
+	#name : #CTHashSetTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'set'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-HashSetTest class >> testSet [
+CTHashSetTest class >> testSet [
 	"self testSet"
 	| set1 set2 |
 	set1 := Set new
@@ -20,13 +20,13 @@ HashSetTest class >> testSet [
 ]
 
 { #category : #running }
-HashSetTest >> setUp [
+CTHashSetTest >> setUp [
 	super setUp.
-	set := HashSet new
+	set := CTHashSet new
 ]
 
 { #category : #testing }
-HashSetTest >> testAdd [
+CTHashSetTest >> testAdd [
 	| set2 |
 	0 to: 10 do: [ :each |
 		set add: each ].
@@ -39,12 +39,12 @@ HashSetTest >> testAdd [
 ]
 
 { #category : #testing }
-HashSetTest >> testAddNil [
+CTHashSetTest >> testAddNil [
 	self should: [ set add: nil ] raise: Error
 ]
 
 { #category : #testing }
-HashSetTest >> testCopy [
+CTHashSetTest >> testCopy [
 	| newSet |
 	0 to: 10 do: [ :each |
 		set add: each ].
@@ -56,7 +56,7 @@ HashSetTest >> testCopy [
 ]
 
 { #category : #testing }
-HashSetTest >> testDo [
+CTHashSetTest >> testDo [
 	0 to: 10 do: [ :each |
 		set add: each ].
 	set do: [ :each |
@@ -64,7 +64,7 @@ HashSetTest >> testDo [
 ]
 
 { #category : #testing }
-HashSetTest >> testEqualsSet [
+CTHashSetTest >> testEqualsSet [
 	| set2 |
 	set2 := Set new.
 	0 to: 10 do: [ :each |
@@ -75,7 +75,7 @@ HashSetTest >> testEqualsSet [
 ]
 
 { #category : #testing }
-HashSetTest >> testEqualsSetTransitive [
+CTHashSetTest >> testEqualsSetTransitive [
 	| set2 |
 	set2 := set species new.
 	0 to: 10 do: [ :each |
@@ -87,7 +87,7 @@ HashSetTest >> testEqualsSetTransitive [
 ]
 
 { #category : #testing }
-HashSetTest >> testRemove [
+CTHashSetTest >> testRemove [
 	0 to: 10 do: [ :each |
 		set add: each ].
 	0 to: 10 do: [ :each |
@@ -97,7 +97,7 @@ HashSetTest >> testRemove [
 ]
 
 { #category : #testing }
-HashSetTest >> testSameHash [
+CTHashSetTest >> testSameHash [
 
 	| string1 string2 |
 	string1 := String newFrom: 'testme!'.
@@ -131,7 +131,7 @@ HashSetTest >> testSameHash [
 ]
 
 { #category : #testing }
-HashSetTest >> testSelect [
+CTHashSetTest >> testSelect [
 	| result |
 	0 to: 10 do: [ :each |
 		set add: each ].
@@ -142,7 +142,7 @@ HashSetTest >> testSelect [
 ]
 
 { #category : #testing }
-HashSetTest >> testSize [
+CTHashSetTest >> testSize [
 	self assert: set size = 0.
 	1 to: 10 do: [ :each |		
 		set add: each.

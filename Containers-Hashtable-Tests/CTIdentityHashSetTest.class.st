@@ -1,5 +1,5 @@
 Class {
-	#name : #IdentityHashSetTest,
+	#name : #CTIdentityHashSetTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'set'
@@ -8,13 +8,13 @@ Class {
 }
 
 { #category : #running }
-IdentityHashSetTest >> setUp [
+CTIdentityHashSetTest >> setUp [
 	super setUp.
-	set := IdentityHashSet new
+	set := CTIdentityHashSet new
 ]
 
 { #category : #testing }
-IdentityHashSetTest >> testSameHash [
+CTIdentityHashSetTest >> testSameHash [
 
 	| string1 string2 |
 	string1 := String newFrom: 'testme!'.

@@ -1,10 +1,10 @@
 Class {
-	#name : #HashBag,
+	#name : #CTHashBag,
 	#superclass : #Bag,
 	#category : #'Containers-Hashtable'
 }
 
 { #category : #'instance creation' }
-HashBag class >> contentsClass [
-	^HashTable
+CTHashBag class >> contentsClass [
+	^CTHashTable
 ]

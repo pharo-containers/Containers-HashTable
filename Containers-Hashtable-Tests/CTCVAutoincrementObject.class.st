@@ -1,5 +1,5 @@
 Class {
-	#name : #CVAutoincrementObject,
+	#name : #CTCVAutoincrementObject,
 	#superclass : #Object,
 	#instVars : [
 		'hash'
@@ -11,18 +11,18 @@ Class {
 }
 
 { #category : #'class initialization' }
-CVAutoincrementObject class >> initialize [
+CTCVAutoincrementObject class >> initialize [
 	"self initialize"
 	NextHash := 0
 ]
 
 { #category : #comparing }
-CVAutoincrementObject >> hash [
+CTCVAutoincrementObject >> hash [
 	^hash
 ]
 
 { #category : #'initialize-release' }
-CVAutoincrementObject >> initialize [
+CTCVAutoincrementObject >> initialize [
 	super initialize.
 	NextHash = SmallInteger maxVal ifTrue: [
 		NextHash := 0 ].

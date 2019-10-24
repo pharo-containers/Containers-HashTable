@@ -1,5 +1,5 @@
 Class {
-	#name : #WeakKeyIdentityHashTableTest,
+	#name : #CTWeakKeyIdentityHashTableTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'table',
@@ -9,14 +9,14 @@ Class {
 }
 
 { #category : #running }
-WeakKeyIdentityHashTableTest >> setUp [
+CTWeakKeyIdentityHashTableTest >> setUp [
 	super setUp.
-	table := WeakKeyIdentityHashTable new.
+	table := CTWeakKeyIdentityHashTable new.
 	testsize := 100.
 ]
 
 { #category : #testing }
-WeakKeyIdentityHashTableTest >> testAddAll [
+CTWeakKeyIdentityHashTableTest >> testAddAll [
 	"(self run: #testAddAll)"
 	
 	|  table2 |
@@ -34,7 +34,7 @@ WeakKeyIdentityHashTableTest >> testAddAll [
 ]
 
 { #category : #testing }
-WeakKeyIdentityHashTableTest >> testAddAndModifyString [
+CTWeakKeyIdentityHashTableTest >> testAddAndModifyString [
 	| key value |
 	key := String newFrom: 'testme!'.
 	value := 1.
@@ -48,7 +48,7 @@ WeakKeyIdentityHashTableTest >> testAddAndModifyString [
 ]
 
 { #category : #testing }
-WeakKeyIdentityHashTableTest >> testAddAssoc [
+CTWeakKeyIdentityHashTableTest >> testAddAssoc [
 	0 to: testsize do: [ :each |
 		self assert: table size = each.
 		table add: each -> each asString ].
@@ -57,7 +57,7 @@ WeakKeyIdentityHashTableTest >> testAddAssoc [
 ]
 
 { #category : #testing }
-WeakKeyIdentityHashTableTest >> testAddCopy [
+CTWeakKeyIdentityHashTableTest >> testAddCopy [
 	| table2 |
 	0 to: testsize do: [ :each |
 		table add: each -> each asString ].
@@ -68,7 +68,7 @@ WeakKeyIdentityHashTableTest >> testAddCopy [
 ]
 
 { #category : #testing }
-WeakKeyIdentityHashTableTest >> testAddEqualStrings [
+CTWeakKeyIdentityHashTableTest >> testAddEqualStrings [
 	| key1 key2 value1 value2 |
 	key1 := String newFrom: 'testme!'.
 	key2 := String newFrom: 'testme!'.
@@ -86,7 +86,7 @@ WeakKeyIdentityHashTableTest >> testAddEqualStrings [
 ]
 
 { #category : #testing }
-WeakKeyIdentityHashTableTest >> testAddEqualStrings2 [
+CTWeakKeyIdentityHashTableTest >> testAddEqualStrings2 [
 	| firstKeys secondsKeys |
 	firstKeys := (1 to: testsize) collect: [ :each | each asString].
 	secondsKeys := (1 to: testsize) collect: [ :each | each asString].
@@ -105,7 +105,7 @@ WeakKeyIdentityHashTableTest >> testAddEqualStrings2 [
 ]
 
 { #category : #testing }
-WeakKeyIdentityHashTableTest >> testAddInteger [
+CTWeakKeyIdentityHashTableTest >> testAddInteger [
 	0 to: testsize do: [ :each |
 		self assert: table size = each.
 		table at: each put: each asString ].
@@ -114,7 +114,7 @@ WeakKeyIdentityHashTableTest >> testAddInteger [
 ]
 
 { #category : #testing }
-WeakKeyIdentityHashTableTest >> testAddString [
+CTWeakKeyIdentityHashTableTest >> testAddString [
 	| keys |
 	keys := (0 to: testsize) collect: [ :each | each asString ].
 	keys do: [ :each |
@@ -125,7 +125,7 @@ WeakKeyIdentityHashTableTest >> testAddString [
 ]
 
 { #category : #testing }
-WeakKeyIdentityHashTableTest >> testAddSymbol [
+CTWeakKeyIdentityHashTableTest >> testAddSymbol [
 	| keys |
 	keys := (0 to: testsize) collect: [ :each | each asString asSymbol ].
 	keys do: [ :each |
@@ -136,7 +136,7 @@ WeakKeyIdentityHashTableTest >> testAddSymbol [
 ]
 
 { #category : #testing }
-WeakKeyIdentityHashTableTest >> testComma [
+CTWeakKeyIdentityHashTableTest >> testComma [
 	"(self run: #testComma)"
 	
 	| table1 table2 |
@@ -154,7 +154,7 @@ WeakKeyIdentityHashTableTest >> testComma [
 ]
 
 { #category : #testing }
-WeakKeyIdentityHashTableTest >> testEqualsDictionary [
+CTWeakKeyIdentityHashTableTest >> testEqualsDictionary [
 	| dictionary |
 	dictionary := Dictionary new.
 	0 to: testsize do: [ :each |
@@ -165,7 +165,7 @@ WeakKeyIdentityHashTableTest >> testEqualsDictionary [
 ]
 
 { #category : #testing }
-WeakKeyIdentityHashTableTest >> testEqualsTransitive [
+CTWeakKeyIdentityHashTableTest >> testEqualsTransitive [
 	| table2 |
 	table2 := table species new.
 	0 to: testsize do: [ :each |
@@ -177,7 +177,7 @@ WeakKeyIdentityHashTableTest >> testEqualsTransitive [
 ]
 
 { #category : #testing }
-WeakKeyIdentityHashTableTest >> testKeys [
+CTWeakKeyIdentityHashTableTest >> testKeys [
 	| keys |
 	keys := (1 to: 100) asOrderedCollection collect: [ :each | each asString ].
 	keys do: [ :each |
@@ -187,7 +187,7 @@ WeakKeyIdentityHashTableTest >> testKeys [
 ]
 
 { #category : #testing }
-WeakKeyIdentityHashTableTest >> testKeysAndValuesDo [
+CTWeakKeyIdentityHashTableTest >> testKeysAndValuesDo [
 	| keys |
 	keys := (1 to: 100) asOrderedCollection collect: [ :each | each asString ].
 	keys do: [ :each |
@@ -200,7 +200,7 @@ WeakKeyIdentityHashTableTest >> testKeysAndValuesDo [
 ]
 
 { #category : #testing }
-WeakKeyIdentityHashTableTest >> testKeysDo [
+CTWeakKeyIdentityHashTableTest >> testKeysDo [
 	| keys |
 	keys := (1 to: 100) asOrderedCollection collect: [ :each | each asString ].
 	keys do: [ :each |
@@ -212,7 +212,7 @@ WeakKeyIdentityHashTableTest >> testKeysDo [
 ]
 
 { #category : #testing }
-WeakKeyIdentityHashTableTest >> testRemoveString [
+CTWeakKeyIdentityHashTableTest >> testRemoveString [
 	| key keys |
 	keys := (0 to: testsize) collect: [ :each | each asString ].
 	keys do: [ :each |
@@ -231,7 +231,7 @@ WeakKeyIdentityHashTableTest >> testRemoveString [
 ]
 
 { #category : #testing }
-WeakKeyIdentityHashTableTest >> testRemoveSymbol [
+CTWeakKeyIdentityHashTableTest >> testRemoveSymbol [
 	| key keys |
 	keys := (0 to: testsize) collect: [ :each | each asString asSymbol ].	
 	keys do: [ :each |
@@ -250,7 +250,7 @@ WeakKeyIdentityHashTableTest >> testRemoveSymbol [
 ]
 
 { #category : #testing }
-WeakKeyIdentityHashTableTest >> testValues [
+CTWeakKeyIdentityHashTableTest >> testValues [
 	| keys |
 	keys := (1 to: 100) asOrderedCollection collect: [ :each | each asString ].
 	keys do: [ :each |
@@ -259,7 +259,7 @@ WeakKeyIdentityHashTableTest >> testValues [
 ]
 
 { #category : #testing }
-WeakKeyIdentityHashTableTest >> testValuesDo [
+CTWeakKeyIdentityHashTableTest >> testValuesDo [
 	| keys |
 	keys := (1 to: 100) asOrderedCollection.
 	keys do: [ :each |
@@ -271,7 +271,7 @@ WeakKeyIdentityHashTableTest >> testValuesDo [
 ]
 
 { #category : #testing }
-WeakKeyIdentityHashTableTest >> testWeakInstance [
+CTWeakKeyIdentityHashTableTest >> testWeakInstance [
 	| createBlock string1 string2 |
 	createBlock := [(String new: 3)
 		at: 1 put: $n;

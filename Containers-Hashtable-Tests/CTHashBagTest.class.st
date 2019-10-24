@@ -1,5 +1,5 @@
 Class {
-	#name : #HashBagTest,
+	#name : #CTHashBagTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'bag'
@@ -8,13 +8,13 @@ Class {
 }
 
 { #category : #running }
-HashBagTest >> setUp [
+CTHashBagTest >> setUp [
 	super setUp.
-	bag := HashBag new.
+	bag := CTHashBag new.
 ]
 
 { #category : #testing }
-HashBagTest >> testAdd [
+CTHashBagTest >> testAdd [
 	bag add: 1.
 	bag add: 1.
 	
@@ -22,14 +22,14 @@ HashBagTest >> testAdd [
 ]
 
 { #category : #testing }
-HashBagTest >> testAddWithOccurrances [
+CTHashBagTest >> testAddWithOccurrances [
 	bag add: 1 withOccurrences: 2.
 	
 	self assert: ((bag occurrencesOf: 1) = 2)
 ]
 
 { #category : #testing }
-HashBagTest >> testCopy [
+CTHashBagTest >> testCopy [
 	| copy |
 	bag add: 1.
 	copy := bag copy.
@@ -44,7 +44,7 @@ HashBagTest >> testCopy [
 ]
 
 { #category : #testing }
-HashBagTest >> testRemove [
+CTHashBagTest >> testRemove [
 	bag add: 1 withOccurrences: 2.
 	bag remove: 1.
 	

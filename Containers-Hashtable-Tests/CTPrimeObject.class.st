@@ -1,10 +1,10 @@
 Class {
-	#name : #PrimeObject,
+	#name : #CTPrimeObject,
 	#superclass : #Object,
 	#category : #'Containers-Hashtable-Tests-ObjectTester'
 }
 
 { #category : #comparing }
-PrimeObject >> hash [
+CTPrimeObject >> hash [
 	^self identityHash * 100799
 ]

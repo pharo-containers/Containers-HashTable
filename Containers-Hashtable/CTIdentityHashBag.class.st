@@ -1,10 +1,10 @@
 Class {
-	#name : #IdentityHashBag,
+	#name : #CTIdentityHashBag,
 	#superclass : #Bag,
 	#category : #'Containers-Hashtable'
 }
 
 { #category : #'instance creation' }
-IdentityHashBag class >> contentsClass [
-	^IdentityHashTable
+CTIdentityHashBag class >> contentsClass [
+	^CTIdentityHashTable
 ]

@@ -1,5 +1,5 @@
 Class {
-	#name : #IdentityHashTableTest,
+	#name : #CTIdentityHashTableTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'table',
@@ -9,14 +9,14 @@ Class {
 }
 
 { #category : #running }
-IdentityHashTableTest >> setUp [
+CTIdentityHashTableTest >> setUp [
 	super setUp.
-	table := IdentityHashTable new.
+	table := CTIdentityHashTable new.
 	testsize := 100.
 ]
 
 { #category : #testing }
-IdentityHashTableTest >> testAddAndModifyString [
+CTIdentityHashTableTest >> testAddAndModifyString [
 	| key value |
 	key := String newFrom: 'testme!'.
 	value := 1.
@@ -31,7 +31,7 @@ IdentityHashTableTest >> testAddAndModifyString [
 ]
 
 { #category : #testing }
-IdentityHashTableTest >> testAddEqualStrings [
+CTIdentityHashTableTest >> testAddEqualStrings [
 	| key1 key2 value1 value2 |
 	key1 := String newFrom: 'testme!'.
 	key2 := String newFrom: 'testme!'.
@@ -51,7 +51,7 @@ IdentityHashTableTest >> testAddEqualStrings [
 ]
 
 { #category : #testing }
-IdentityHashTableTest >> testAddSymbol [
+CTIdentityHashTableTest >> testAddSymbol [
 	0 to: testsize do: [ :each |
 		self assert: table size = each.
 		table at: each asString asSymbol put: each ].
@@ -60,7 +60,7 @@ IdentityHashTableTest >> testAddSymbol [
 ]
 
 { #category : #testing }
-IdentityHashTableTest >> testRemoveSymbol [
+CTIdentityHashTableTest >> testRemoveSymbol [
 	0 to: testsize do: [ :each |
 		self assert: table size = each.
 		table at: each asString asSymbol put: each ].

@@ -1,5 +1,5 @@
 Class {
-	#name : #IdentityHashBagTest,
+	#name : #CTIdentityHashBagTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'bag'
@@ -8,13 +8,13 @@ Class {
 }
 
 { #category : #running }
-IdentityHashBagTest >> setUp [
+CTIdentityHashBagTest >> setUp [
 	super setUp.
-	bag := IdentityHashBag new.
+	bag := CTIdentityHashBag new.
 ]
 
 { #category : #testing }
-IdentityHashBagTest >> testAdd [
+CTIdentityHashBagTest >> testAdd [
 	| first second |
 	first := String newFrom: 'key'.
 	second := String newFrom: 'key'.
@@ -31,7 +31,7 @@ IdentityHashBagTest >> testAdd [
 ]
 
 { #category : #testing }
-IdentityHashBagTest >> testAddWithOccurrances [
+CTIdentityHashBagTest >> testAddWithOccurrances [
 	| first second |
 	first := String newFrom: 'key'.
 	second := String newFrom: 'key'.
@@ -43,7 +43,7 @@ IdentityHashBagTest >> testAddWithOccurrances [
 ]
 
 { #category : #testing }
-IdentityHashBagTest >> testRemove [
+CTIdentityHashBagTest >> testRemove [
 	| first second |
 	first := String newFrom: 'key'.
 	second := String newFrom: 'key'.

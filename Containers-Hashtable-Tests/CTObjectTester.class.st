@@ -1,5 +1,5 @@
 Class {
-	#name : #ObjectTester,
+	#name : #CTObjectTester,
 	#superclass : #Object,
 	#instVars : [
 		'instances'
@@ -8,29 +8,29 @@ Class {
 }
 
 { #category : #testing }
-ObjectTester class >> testAll [
+CTObjectTester class >> testAll [
 	"self testAll"
 	self new testAll
 ]
 
 { #category : #'initialize-release' }
-ObjectTester >> initialize [
+CTObjectTester >> initialize [
 	super initialize.
 	self instances: 1000000
 ]
 
 { #category : #accessing }
-ObjectTester >> instances [
+CTObjectTester >> instances [
 	^instances
 ]
 
 { #category : #accessing }
-ObjectTester >> instances: anInteger [ 
+CTObjectTester >> instances: anInteger [ 
 	instances := anInteger
 ]
 
 { #category : #testing }
-ObjectTester >> test: aClass on: aStream [
+CTObjectTester >> test: aClass on: aStream [
 	aStream nextPutAll: aClass name.
 	aStream tab.
 	aStream nextPutAll: [
@@ -39,7 +39,7 @@ ObjectTester >> test: aClass on: aStream [
 ]
 
 { #category : #testing }
-ObjectTester >> testAll [
+CTObjectTester >> testAll [
 	"self new testAll"
 	
 	| stream |
@@ -54,10 +54,10 @@ ObjectTester >> testAll [
 ]
 
 { #category : #accessing }
-ObjectTester >> testClasses [
+CTObjectTester >> testClasses [
 	^Array
 		with: Object
-		with: CVAutoincrementObject
-		with: CIVAutoincrementObject		
-		with: RandomObject
+		with: CTCVAutoincrementObject
+		with: CTCIVAutoincrementObject		
+		with: CTRandomObject
 ]
