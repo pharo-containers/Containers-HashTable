@@ -1,11 +1,11 @@
 Class {
-	#name : #BaselineOfCOntainersHashTable,
+	#name : #BaselineOfContainersHashTable,
 	#superclass : #BaselineOf,
 	#category : #BaselineOfContainersHashTable
 }
 
 { #category : #baseline }
-BaselineOfCOntainersHashTable >> baseline: spec [
+BaselineOfContainersHashTable >> baseline: spec [
 	<baseline>
 	spec
 		for: #pharo
