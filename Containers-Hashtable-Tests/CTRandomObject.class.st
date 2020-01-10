@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'hash'
 	],
-	#category : #'Containers-Hashtable-Tests-ObjectTester'
+	#category : #'Containers-HashTable-Tests-ObjectTester'
 }
 
 { #category : #comparing }

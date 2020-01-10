@@ -1,7 +1,7 @@
 Class {
 	#name : #CTWeakKeyTableItem,
 	#superclass : #CTTableItem,
-	#category : #'Containers-Hashtable'
+	#category : #'Containers-HashTable'
 }
 
 { #category : #accessing }

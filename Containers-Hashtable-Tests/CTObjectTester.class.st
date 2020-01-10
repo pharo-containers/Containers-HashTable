@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'instances'
 	],
-	#category : #'Containers-Hashtable-Tests-ObjectTester'
+	#category : #'Containers-HashTable-Tests-ObjectTester'
 }
 
 { #category : #testing }

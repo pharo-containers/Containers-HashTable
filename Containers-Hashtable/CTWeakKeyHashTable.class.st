@@ -1,7 +1,7 @@
 Class {
 	#name : #CTWeakKeyHashTable,
 	#superclass : #CTHashTable,
-	#category : #'Containers-Hashtable'
+	#category : #'Containers-HashTable'
 }
 
 { #category : #adding }

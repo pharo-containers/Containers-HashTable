@@ -1,18 +1,18 @@
 Class {
-	#name : #BaselineOfCOntainersHashtable,
+	#name : #BaselineOfCOntainersHashTable,
 	#superclass : #BaselineOf,
 	#category : #BaselineOfContainersHashtable
 }
 
 { #category : #baseline }
-BaselineOfCOntainersHashtable >> baseline: spec [
+BaselineOfCOntainersHashTable >> baseline: spec [
 	<baseline>
 	spec
 		for: #pharo
 		do: [
-			spec package: 'Containers-Hashtable'.
-			spec package: 'Containers-Hashtable-Tests' with: [ spec requires: 'Containers-Hashtable' ].
+			spec package: 'Containers-HashTable'.
+			spec package: 'Containers-HashTable-Tests' with: [ spec requires: 'Containers-HashTable' ].
 			
-			spec group: 'default' with: #('Containers-Hashtable' 'Containers-Hashtable-Tests')
+			spec group: 'default' with: #('Containers-HashTable' 'Containers-HashTable-Tests')
 		]
 ]

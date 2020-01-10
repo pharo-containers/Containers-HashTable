@@ -7,7 +7,7 @@ Class {
 	#classInstVars : [
 		'nextHash'
 	],
-	#category : #'Containers-Hashtable-Tests-ObjectTester'
+	#category : #'Containers-HashTable-Tests-ObjectTester'
 }
 
 { #category : #'class initialization' }

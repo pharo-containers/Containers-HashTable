@@ -5,7 +5,7 @@ Class {
 		'stepsize',
 		'testsize'
 	],
-	#category : #'Containers-Hashtable-Tests-SUnit'
+	#category : #'Containers-HashTable-Tests-SUnit'
 }
 
 { #category : #finding }

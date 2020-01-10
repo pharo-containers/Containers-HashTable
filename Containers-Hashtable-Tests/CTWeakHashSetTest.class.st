@@ -1,7 +1,7 @@
 Class {
 	#name : #CTWeakHashSetTest,
 	#superclass : #CTHashSetTest,
-	#category : #'Containers-Hashtable-Tests-SUnit'
+	#category : #'Containers-HashTable-Tests-SUnit'
 }
 
 { #category : #running }

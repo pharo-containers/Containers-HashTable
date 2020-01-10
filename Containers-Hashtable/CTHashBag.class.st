@@ -1,7 +1,7 @@
 Class {
 	#name : #CTHashBag,
 	#superclass : #Bag,
-	#category : #'Containers-Hashtable'
+	#category : #'Containers-HashTable'
 }
 
 { #category : #'instance creation' }

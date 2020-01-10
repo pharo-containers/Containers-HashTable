@@ -1,1 +1,1 @@
-Package { #name : #'Containers-Hashtable' }
+Package { #name : #'Containers-HashTable' }
