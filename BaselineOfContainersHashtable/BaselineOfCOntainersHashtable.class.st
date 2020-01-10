@@ -1,7 +1,7 @@
 Class {
 	#name : #BaselineOfCOntainersHashTable,
 	#superclass : #BaselineOf,
-	#category : #BaselineOfContainersHashtable
+	#category : #BaselineOfContainersHashTable
 }
 
 { #category : #baseline }
