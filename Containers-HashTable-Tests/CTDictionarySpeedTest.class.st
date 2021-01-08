@@ -1,3 +1,7 @@
+"
+I defined a couple of methods to test speed of the implementation. 
+See `self new testClasses` and `self new testObjects`
+"
 Class {
 	#name : #CTDictionarySpeedTest,
 	#superclass : #Object,
@@ -106,64 +110,20 @@ CTDictionarySpeedTest >> asSelector: aClass [
 	^ ( 'test' , aClass name, '0n:' ) asSymbol
 ]
 
-{ #category : #'initialize-release' }
+{ #category : #accessing }
+CTDictionarySpeedTest >> dictionaryClassesUnderTest [
+	^ { Dictionary .  IdentityDictionary . CTHashTable . CTIdentityHashTable }
+]
+
+{ #category : #initialization }
 CTDictionarySpeedTest >> initialize [
 	super initialize.
-	self stepsize: 100.
-	self testsize: 10000.
+	self stepSize: 100.
+	self testSize: 10000.
 ]
 
 { #category : #accessing }
-CTDictionarySpeedTest >> stepsize [
-	^stepsize
-]
-
-{ #category : #accessing }
-CTDictionarySpeedTest >> stepsize: anObject [
-	stepsize := anObject
-]
-
-{ #category : #testing }
-CTDictionarySpeedTest >> testClasses [
-	| stream |
-	self testDictionaryClasses do: [ :each |
-		Transcript show: 'Testing: ' , each name asString ; cr.
-		stream := FileStream fileNamed: each name , '.classdata' .
-		self perform: #testDictionary:of:on:  withArguments: (Array with: each with: Object with: stream).
-		stream close ].
-	Transcript show: 'done' ; cr.
-]
-
-{ #category : #testing }
-CTDictionarySpeedTest >> testDictionary: aDictionaryClass of: anObjectClass on: aStream [ 
-	| test ord |
-	test := aDictionaryClass new.
-	[ test size >= self testsize] whileFalse: [
-			ord := OrderedCollection new: self stepsize.
-			self stepsize timesRepeat: [ 
-				test at: ( ord add: anObjectClass new ) put: nil ].
-			aStream
-				nextPutAll: test size asString;
-				tab.
-			aStream nextPutAll:
-				[
-					10 timesRepeat: [ 
-						ord do: [ :each | test at: each ] ]
-				] timeToRun asString.
-		aStream cr ]
-]
-
-{ #category : #accessing }
-CTDictionarySpeedTest >> testDictionaryClasses [
-	^Array
-		with: Dictionary
-		with: IdentityDictionary
-		with: CTHashTable
-		with: CTIdentityHashTable
-]
-
-{ #category : #accessing }
-CTDictionarySpeedTest >> testObjectClasses [
+CTDictionarySpeedTest >> objectClassesUnderTest [
 	^Array
 		with: Object
 		with: CTPrimeObject
@@ -172,23 +132,71 @@ CTDictionarySpeedTest >> testObjectClasses [
 		with: RandomObject"
 ]
 
+{ #category : #accessing }
+CTDictionarySpeedTest >> stepSize [
+	^stepsize
+]
+
+{ #category : #accessing }
+CTDictionarySpeedTest >> stepSize: anObject [
+	stepsize := anObject
+]
+
+{ #category : #utility }
+CTDictionarySpeedTest >> test: aCollectionOfClasses [
+	"self new testClasses"
+	aCollectionOfClasses do: [ :each |
+		| stream |
+		stream :=  (each name , '.classdata') asFileReference writeStream .
+		self perform: #testDictionary:of:on:  withArguments: (Array with: each with: Object with: stream).
+		stream close ].
+	
+]
+
+{ #category : #testing }
+CTDictionarySpeedTest >> testClasses [
+	"self new testClasses"
+	
+	self test: self dictionaryClassesUnderTest 
+]
+
+{ #category : #utility }
+CTDictionarySpeedTest >> testDictionary: aDictionaryClass of: anObjectClass on: aStream [ 
+	| test ord |
+	test := aDictionaryClass new.
+	[ test size >= self testSize ] whileFalse: [
+			ord := OrderedCollection new: self stepSize.
+			self stepSize timesRepeat: [ 
+				test at: (ord add: anObjectClass new) put: nil ].
+			aStream
+				nextPutAll: test size asString;
+				tab.
+			aStream nextPutAll:
+				[
+					1000 timesRepeat: [ 
+						ord do: [ :each | test at: each ] ]
+				] timeToRun asString.
+		aStream cr ]
+]
+
 { #category : #testing }
 CTDictionarySpeedTest >> testObjects [
+	"self new testObjects"
 	| stream |
-	self testObjectClasses do: [ :each |
+	self objectClassesUnderTest do: [ :each |
 		Transcript show: 'Testing: ' , each name asString ; cr.
-		stream := FileStream fileNamed: each name , '.objectdata' .
+		stream := (each name , '.objectdata') asFileReference writeStream.
 		self perform: #testDictionary:of:on:  withArguments: (Array with: Dictionary with: each with: stream).
 		stream close ].
 	Transcript show: 'done' ; cr.
 ]
 
 { #category : #accessing }
-CTDictionarySpeedTest >> testsize [
+CTDictionarySpeedTest >> testSize [
 	^testsize
 ]
 
 { #category : #accessing }
-CTDictionarySpeedTest >> testsize: anObject [
+CTDictionarySpeedTest >> testSize: anObject [
 	testsize := anObject
 ]
