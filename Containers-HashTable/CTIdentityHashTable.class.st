@@ -1,7 +1,7 @@
 Class {
 	#name : #CTIdentityHashTable,
 	#superclass : #CTHashTable,
-	#category : #'Containers-HashTable'
+	#category : #'Containers-HashTable-Hash'
 }
 
 { #category : #private }

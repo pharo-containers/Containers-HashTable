@@ -7,7 +7,7 @@ Yes this is ugly, give me Traits and I will fix it.
 Class {
 	#name : #CTIdentityHashSet,
 	#superclass : #CTHashSet,
-	#category : #'Containers-HashTable'
+	#category : #'Containers-HashTable-Hash'
 }
 
 { #category : #private }

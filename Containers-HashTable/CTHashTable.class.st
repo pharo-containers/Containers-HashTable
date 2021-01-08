@@ -7,7 +7,7 @@ Class {
 		'size',
 		'capacity'
 	],
-	#category : #'Containers-HashTable'
+	#category : #'Containers-HashTable-Hash'
 }
 
 { #category : #'as yet unclassified' }

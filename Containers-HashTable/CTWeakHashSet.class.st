@@ -1,7 +1,7 @@
 Class {
 	#name : #CTWeakHashSet,
 	#superclass : #CTHashSet,
-	#category : #'Containers-HashTable'
+	#category : #'Containers-HashTable-Hash'
 }
 
 { #category : #enumerating }
