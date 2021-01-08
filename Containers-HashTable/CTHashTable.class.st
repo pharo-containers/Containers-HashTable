@@ -64,12 +64,17 @@ CTHashTable >> = aDictionary [
 
 { #category : #adding }
 CTHashTable >> add: anAssociation [
-	^self at: anAssociation key put: anAssociation value
+	"Add a new entry in the receiver based on the argument. The key of the entry is the key of anAssociation and the value the value of anAssociation."
+	^ self at: anAssociation key put: anAssociation value
 ]
 
 { #category : #adding }
-CTHashTable >> add: newObject withOccurrences: anInteger [
-	^ self add: newObject
+CTHashTable >> add: anAssociation withOccurrences: anInteger [
+	"Add anAssociation one time to the receiver because it does not make sense to add several time the same key/value to a dictionary."
+	
+	anInteger < 1 ifTrue: [ ^ anAssociation ].
+	"I can only store an object once."
+	^ self add: anAssociation
 ]
 
 { #category : #adding }
@@ -297,6 +302,7 @@ CTHashTable >> itemFor: aKey atIndex: anInteger [
 { #category : #accessing }
 CTHashTable >> keys [
 	"Answer a Collection containing the receiver's values."
+	
 	| out |
 	out := WriteStream on: (Array new: self size).
 	self keysDo: [:value | out nextPut: value].
