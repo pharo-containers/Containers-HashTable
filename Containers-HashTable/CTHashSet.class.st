@@ -48,9 +48,8 @@ CTHashSet >> collect: aBlock [
 
 { #category : #enumerating }
 CTHashSet >> do: aBlock [
-	"self keysDo: aBlock"
-	self keysAndValuesDo: [ :key :value |
-		aBlock value: key ]
+	
+	self keysAndValuesDo: [ :key :value | aBlock value: key ]
 ]
 
 { #category : #testing }
@@ -65,7 +64,7 @@ CTHashSet >> occurrencesOf: anObject [
 
 { #category : #printing }
 CTHashSet >> printOn: aStream [ 
-	"printNameOn:"
+
 	| title |
 	title := self class name.
 	aStream

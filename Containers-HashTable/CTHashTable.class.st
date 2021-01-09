@@ -230,9 +230,10 @@ CTHashTable >> do: aBlock [
 	self valuesDo: aBlock
 ]
 
-{ #category : #public }
+{ #category : #private }
 CTHashTable >> ensureCapacity: anInteger [
-	"returns if the table had to grow"
+	"Returns if the table had to grow"
+	
 	self capacity < anInteger
 		ifTrue: [
 			self growTo: (self computeNewSize: anInteger).
@@ -263,21 +264,15 @@ CTHashTable >> hashFor: anObject [
 
 { #category : #testing }
 CTHashTable >> includesKey: aKey [
+
 	self at: aKey ifAbsent: [ ^false ].
 	^true.
 ]
 
-{ #category : #'initialize-release' }
+{ #category : #initialization }
 CTHashTable >> initialize [
 	super initialize.
 	self size: 0.
-]
-
-{ #category : #'user interface' }
-CTHashTable >> inspectWithLabel: aLabel [
-	"Open a HashTableInspector on the receiver. Use basicInspect to get a normal (less useful) type of inspector."
-
-	self inspectorClass openOn: self withEvalPane: true withLabel: aLabel
 ]
 
 { #category : #private }
