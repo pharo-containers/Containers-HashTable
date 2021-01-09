@@ -17,7 +17,8 @@ CTHashSet >> = aSet [
 { #category : #adding }
 CTHashSet >> add: newObject [
 	newObject ifNil: [self error: 'Sets cannot meaningfully contain nil as an element'].
-	^self at: newObject put: true
+	self at: newObject put: true.
+	^ newObject
 ]
 
 { #category : #adding }

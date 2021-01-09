@@ -1,8 +1,13 @@
 Class {
 	#name : #CTHashSetTest,
 	#superclass : #TestCase,
+	#traits : 'TCloneTest + TAddForUniquenessTest',
+	#classTraits : 'TCloneTest classTrait + TAddForUniquenessTest classTrait',
 	#instVars : [
-		'set'
+		'set',
+		'empty',
+		'full',
+		'collectionWith3Elements'
 	],
 	#category : #'Containers-HashTable-Tests-SUnit'
 }
@@ -20,9 +25,47 @@ CTHashSetTest class >> testSet [
 ]
 
 { #category : #running }
+CTHashSetTest >> classToBeTested [
+	^ CTHashSet
+]
+
+{ #category : #'helper uniqueness' }
+CTHashSetTest >> collectionWithElement [
+	^ full
+]
+
+{ #category : #'helper uniqueness' }
+CTHashSetTest >> collectionWithoutElement [
+	" return a collection that does not include 'element' "
+	^ collectionWith3Elements  
+]
+
+{ #category : #'helper uniqueness' }
+CTHashSetTest >> element [
+	^ 4
+]
+
+{ #category : #'helper clone' }
+CTHashSetTest >> empty [
+	
+	^ empty
+]
+
+{ #category : #'helper clone' }
+CTHashSetTest >> nonEmpty [
+	
+	^ full
+]
+
+{ #category : #running }
 CTHashSetTest >> setUp [
 	super setUp.
-	set := CTHashSet new
+	set := self classToBeTested new.
+	empty := self classToBeTested new.
+	full := self classToBeTested  with: 1 with: 2 with: 3 with: 4.
+	
+	collectionWith3Elements := self classToBeTested new.
+	collectionWith3Elements add: 1; add: -2; add: 3. 
 ]
 
 { #category : #testing }
